@@ -8,7 +8,7 @@ import no.hvl.dat100ptc.oppgave1.GPSPoint;
 public class GPSUtils {
 
 	public static double findMax(double[] da) {
-		// Heihei!!!
+
 		double max; 
 		
 		max = da[0];
@@ -82,18 +82,13 @@ public class GPSUtils {
 	}
 
 	public static String formatTime(int secs) {
+
+		String timestr;
 		String TIMESEP = ":";
-		int timer = secs/(60*60);
-		secs = secs - timer*60*60;
-		int minu = secs/60;
-		secs = secs-minu*60;
-		
-		String timestr = timer+TIMESEP+minu+TIMESEP+secs;
-		return timestr;
 
 		// TODO - START
 
-		//throw new UnsupportedOperationException(TODO.method());
+		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 
