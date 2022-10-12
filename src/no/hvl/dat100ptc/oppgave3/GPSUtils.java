@@ -66,69 +66,61 @@ public class GPSUtils {
 
 		double d;
 		double latitude1, longitude1, latitude2, longitude2;
-		
-		latitude1= Math.toRadians(gpspoint1.getLatitude());
-		latitude2= Math.toRadians(gpspoint2.getLatitude());
-		longitude1= Math.toRadians(gpspoint1.getLongitude());
-		longitude2= Math.toRadians(gpspoint2.getLongitude());
+
+		latitude1 = Math.toRadians(gpspoint1.getLatitude());
+		latitude2 = Math.toRadians(gpspoint2.getLatitude());
+		longitude1 = Math.toRadians(gpspoint1.getLongitude());
+		longitude2 = Math.toRadians(gpspoint2.getLongitude());
 		double dLat = latitude2 - latitude1;
 		double dLong = longitude2 - longitude1;
-		double avstand = Math.pow((sin(dLat / 2)), 2) + cos(latitude1) * cos(latitude2) * Math.pow(sin(dLong / 2),2);
-		double c =2 *atan2(sqrt(avstand),sqrt(1-avstand));
-		d = R *c;
+		double avstand = Math.pow((sin(dLat / 2)), 2) + cos(latitude1) * cos(latitude2) * Math.pow(sin(dLong / 2), 2);
+		double c = 2 * atan2(sqrt(avstand), sqrt(1 - avstand));
+		d = R * c;
 		// TODO - SLUTT
-return d;
+		return d;
 	}
 
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
-		double tid1 =gpspoint1.getTime();
-		double tid2 =gpspoint2.getTime();
-		
-		double secs = tid2-tid1;
+		double tid1 = gpspoint1.getTime();
+		double tid2 = gpspoint2.getTime();
+
+		double secs = tid2 - tid1;
 		double speed;
 
-		 double distanse =distance(gpspoint1, gpspoint2);
-		 speed = distanse/secs;
-		 speed = speed *3.6; // konverterer fra m/s til km/h
+		double distanse = distance(gpspoint1, gpspoint2);
+		speed = distanse / secs;
+		speed = speed * 3.6; // konverterer fra m/s til km/h
 
 		return speed;
 	}
 
 	public static String formatTime(int secs) {
 //
-//		String timestr;
-//		String TIMESEP = ":";
-//
-//		double minutter = secs/60;
-//		double timer = minutter/60;
-//		
-//		double klokke = timer%
 
+		String TIMESEP = String.format("%s", ":");
+		int timer = secs / (60 * 60);
+		secs = (secs - timer * 60 * 60);
+		int minu = secs / 60;
+		secs = secs - minu * 60;
 
-				String TIMESEP = ":";
-        int timer = secs/(60*60);
-        secs = (secs - timer*60*60);
-        int minu = secs/60;
-        secs = secs-minu*60;
-        
-
-        String timestr = timer+TIMESEP+minu+TIMESEP+secs;
-        return timestr;
+		String timestr = String.format("%02d", timer);
+		String minustr = String.format("%02d", minu);
+		String secstr = String.format("%02d", secs);
+		String total = String.format("%" + (10) + "s", timestr + TIMESEP + minustr + TIMESEP + secstr);
+		return total;
 
 	}
 
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
-	
-		
-double avrundet = Math.round(d*100)/100.0;
 
-//String str ="      "+ String.format("%.3g%n", avrundet);,
- String str ="      "+ Double.toString(avrundet);
-return str;
+		double avrundet = Math.round(d * 100) / 100.0;
 
 		
+		String str1 = (Double.toString(avrundet));
+		String str2 =  String.format("%" + (10) + "s",str1);
+		return str2;
 
 	}
 }
