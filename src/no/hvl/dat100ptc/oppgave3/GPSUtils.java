@@ -123,7 +123,7 @@ return d;
 	
 		
 double avrundet = Math.round(d*100)/100.0;
-int r;
+
 //String str ="      "+ String.format("%.3g%n", avrundet);
  String str ="      "+ Double.toString(avrundet);
 return str;
