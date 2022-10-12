@@ -8,7 +8,7 @@ import no.hvl.dat100ptc.oppgave1.GPSPoint;
 public class GPSUtils {
 
 	public static double findMax(double[] da) {
-
+		// Heihei!
 		double max; 
 		
 		max = da[0];
