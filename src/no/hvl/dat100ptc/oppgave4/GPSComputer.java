@@ -30,32 +30,27 @@ public class GPSComputer {
 	public double totalDistance() {
 
 		double distance = 0;
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
+		for (int i=0;i<gpspoints.length-1;i++) {
+			distance = distance +GPSUtils.distance(gpspoints[i],gpspoints[i+1]);
+		}
+		return distance;
+		//throw new UnsupportedOperationException(TODO.method());
 
 	}
 
 	// beregn totale høydemeter (i meter)
 	public double totalElevation() {
 
-		double elevation = 0;
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
+		return gpspoints[gpspoints.length-1].getElevation();
+		// her var vi litt usikre, distance=0 stod der fra før, men vi fant ut at vi ikke trengte den
 
 	}
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
 
-		throw new UnsupportedOperationException(TODO.method());
+		return gpspoints[gpspoints.length-1].getTime()-gpspoints[0].getTime();
+		//throw new UnsupportedOperationException(TODO.method());
 
 	}
 		
@@ -63,21 +58,23 @@ public class GPSComputer {
 
 	public double[] speeds() {
 		
-		// TODO - START		// OPPGAVE - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		double[] speeds = new double[gpspoints.length-1];
+		for (int i=0;i<speeds.length;i++)
+			speeds[i]=GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
+		return speeds;
+//		throw new UnsupportedOperationException(TODO.method());
 
-		// TODO - SLUTT
 
 	}
 	
 	public double maxSpeed() {
 		
 		double maxspeed = 0;
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < gpspoints.length-1; i++)
+			if (GPSUtils.speed(gpspoints[i], gpspoints[i + 1]) > maxspeed)
+				maxspeed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+		return maxspeed;
+//		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
@@ -140,7 +137,7 @@ public class GPSComputer {
 	
 	public void displayStatistics() {
 
-		System.out.println("==============================================");
+		//System.out.println("==============================================");
 
 		// TODO - START
 
