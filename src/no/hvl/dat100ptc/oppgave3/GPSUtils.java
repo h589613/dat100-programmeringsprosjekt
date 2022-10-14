@@ -106,21 +106,24 @@ public class GPSUtils {
 		String timestr = String.format("%02d", timer);
 		String minustr = String.format("%02d", minu);
 		String secstr = String.format("%02d", secs);
-		String total = String.format("%" + (10) + "s", timestr + TIMESEP + minustr + TIMESEP + secstr);
+		String total = String.format("%" + (10) + "s", timestr + TIMESEP + minustr + TIMESEP + secstr); // setter av 10 desimaler
 		return total;
 
 	}
 
 	private static int TEXTWIDTH = 10;
-
+	
+	
 	public static String formatDouble(double d) {
+        int førK = (int)d;
+        double etterK = java.lang.Math.round((d-førK)*100)/100.0;
+        String etterKStr = ""+etterK;
+        if (etterKStr.length()==3)
+            etterKStr=etterKStr+"0";
+        
+        String retVerdi =førK+etterKStr.substring(1);
+        return  String.format("%" + (TEXTWIDTH) + "s",retVerdi);
+    }
 
-		double avrundet = Math.round(d * 100) / 100.0;
-
-		
-		String str1 = (Double.toString(avrundet));
-		String str2 =  String.format("%" + (10) + "s",str1);
-		return str2;
-
-	}
+	
 }
