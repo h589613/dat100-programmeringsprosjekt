@@ -11,8 +11,8 @@ import no.hvl.dat100ptc.oppgave4.GPSComputer;
 public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;
-	private static int MAPXSIZE = 800;
-	private static int MAPYSIZE = 800;
+	private static int MAPXSIZE = 600;
+	private static int MAPYSIZE = 600;
 
 	private GPSPoint[] gpspoints;
 	private GPSComputer gpscomputer;
@@ -44,7 +44,6 @@ public class ShowRoute extends EasyGraphics {
 
 		double maxlon = GPSUtils.findMax(GPSUtils.getLongitudes(gpspoints));
 		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
-
 		double xstep = MAPXSIZE / (Math.abs(maxlon - minlon)); 
 
 		return xstep;
@@ -55,7 +54,6 @@ public class ShowRoute extends EasyGraphics {
 	
 		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
 		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
-		
 		double ystep = MAPYSIZE / (Math.abs(maxlat-minlat));
 		
 		return ystep;		
@@ -66,15 +64,36 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showRouteMap(int ybase) {
-//
-		for (int i = 0;i<gpspoints.length;i++) {
-			fillCircle((int)gpspoints[i].getLongitude(),(int)(gpspoints[i].getLatitude()),1);
-//			fillCircle((int)this.xstep(),(int)this.ystep(),2);
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
+		
+		
+		drawCircle(
+				(int)java.lang.Math.round(MARGIN + (gpspoints[0].getLongitude() - minlon) * xstep()),
+				(int)java.lang.Math.round(ybase - (gpspoints[0].getLatitude() - minlat) * ystep()),
+				3
+				);
+
+		for (int i = 1; i < gpspoints.length; i++) {
+			if (gpspoints[i].getElevation()>gpspoints[i-1].getElevation())
+				setColor(255,0,0);
+			else 
+				setColor(0,255,0);
+			fillCircle(
+					(int)java.lang.Math.round(MARGIN + (gpspoints[i].getLongitude() - minlon) * xstep()),
+					(int)java.lang.Math.round(ybase - (gpspoints[i].getLatitude() - minlat) * ystep()),
+					3
+					);
+			drawLine(
+					(int)java.lang.Math.round(MARGIN + (gpspoints[i].getLongitude() - minlon) * xstep()),
+					(int)java.lang.Math.round(ybase - (gpspoints[i].getLatitude() - minlat) * ystep()),
+					(int)java.lang.Math.round(MARGIN + (gpspoints[i-1].getLongitude() - minlon) * xstep()),
+					(int)java.lang.Math.round(ybase - (gpspoints[i-1].getLatitude() - minlat) * ystep())
+					);
+			
 		}
-		
-		//throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT
+		// throw new UnsupportedOperationException(TODO.method());
+
 	}
 
 	public void showStatistics() {
