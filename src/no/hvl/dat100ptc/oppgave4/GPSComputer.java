@@ -34,7 +34,7 @@ public class GPSComputer {
 			distance = distance + GPSUtils.distance(gpspoints[i], gpspoints[i + 1]);
 		}
 		return distance;
-		// throw new UnsupportedOperationException(TODO.method());
+		
 
 	}
 
@@ -48,9 +48,7 @@ public class GPSComputer {
 		}
 		return elevation;
 		
-		//return gpspoints[gpspoints.length - 1].getElevation();
-		// her var vi litt usikre, distance=0 stod der fra før, men vi fant ut at vi
-		// ikke trengte den
+		
 
 	
 	}
@@ -71,7 +69,7 @@ public class GPSComputer {
 		for (int i = 0; i < speeds.length; i++)
 			speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
 		return speeds;
-//		throw new UnsupportedOperationException(TODO.method());
+
 
 	}
 
@@ -82,9 +80,6 @@ public class GPSComputer {
 			if (GPSUtils.speed(gpspoints[i], gpspoints[i + 1]) > maxspeed)
 				maxspeed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
 		return maxspeed;
-//		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
 
 	}
 
@@ -157,12 +152,12 @@ for (int i =0; i<gpspoints.length-1; i++) {
 	public void displayStatistics() {
 
 		System.out.println("==============================================");
-String timestr   = "Total Time     :";
-String distStr   = "Total Distance :";
-String elevStr   = "Total Elevation:";
-String mSpeedStr = "Max Speed      :";
-String aSpeedStr = "Average Speed  :";
-String energyStr = "Energy         :";
+String timestr   = "Total Time     : ";
+String distStr   = "Total Distance : ";
+String elevStr   = "Total Elevation: ";
+String mSpeedStr = "Max Speed      : ";
+String aSpeedStr = "Average Speed  : ";
+String energyStr = "Energy         : ";
 		// String.format("%" + (10) + "s"
 		//System.out.println(timestr + String.format("%" + (46-timestr.length()) + "s", "" + GPSUtils.formatTime(totalTime())));
 		System.out.println(timestr + GPSUtils.formatTime(totalTime()));
