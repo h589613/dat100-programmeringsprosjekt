@@ -136,6 +136,7 @@ public class ShowRoute extends EasyGraphics {
 		drawString(GPSUtils.formatDouble(gpscomputer.averageSpeed()) + " km/t", STATSDIST, TEXTDISTANCE*5);
 		drawString(GPSUtils.formatDouble(gpscomputer.totalKcal(WEIGHT)) + " kcal", STATSDIST, TEXTDISTANCE*6);
 		// TODO - SLUTT;
+		// Testing
 	}
 
 }
