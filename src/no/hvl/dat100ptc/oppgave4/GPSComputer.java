@@ -34,30 +34,25 @@ public class GPSComputer {
 			distance = distance + GPSUtils.distance(gpspoints[i], gpspoints[i + 1]);
 		}
 		return distance;
-		
 
 	}
 
 	// beregn totale høydemeter (i meter)
 	public double totalElevation() {
 		double elevation = 0;
-		for(int i =0; i<gpspoints.length-1; i++) {
-			if (gpspoints[i+1].getElevation()>gpspoints[i].getElevation()) {
-				elevation = elevation+gpspoints[i+1].getElevation()-gpspoints[i].getElevation();
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			if (gpspoints[i + 1].getElevation() > gpspoints[i].getElevation()) {
+				elevation = elevation + gpspoints[i + 1].getElevation() - gpspoints[i].getElevation();
 			}
 		}
 		return elevation;
-		
-		
 
-	
 	}
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
 
 		return gpspoints[gpspoints.length - 1].getTime() - gpspoints[0].getTime();
-	
 
 	}
 
@@ -69,7 +64,6 @@ public class GPSComputer {
 		for (int i = 0; i < speeds.length; i++)
 			speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
 		return speeds;
-
 
 	}
 
@@ -137,11 +131,11 @@ public class GPSComputer {
 	public double totalKcal(double weight) {
 
 		double totalkcal = 0;
-		
-for (int i =0; i<gpspoints.length-1; i++) {
-	totalkcal = totalkcal + kcal(weight, gpspoints[i+1].getTime()-gpspoints[i].getTime(), GPSUtils.speed(gpspoints[i], gpspoints[i+1]));
-}
-		
+
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			totalkcal = totalkcal + kcal(weight, gpspoints[i + 1].getTime() - gpspoints[i].getTime(),
+					GPSUtils.speed(gpspoints[i], gpspoints[i + 1]));
+		}
 
 		return totalkcal;
 
@@ -152,20 +146,20 @@ for (int i =0; i<gpspoints.length-1; i++) {
 	public void displayStatistics() {
 
 		System.out.println("==============================================");
-String timestr   = "Total Time     : ";
-String distStr   = "Total Distance : ";
-String elevStr   = "Total Elevation: ";
-String mSpeedStr = "Max Speed      : ";
-String aSpeedStr = "Average Speed  : ";
-String energyStr = "Energy         : ";
-		
-		
+		String timestr = "Total Time     : ";
+		String distStr = "Total Distance : ";
+		String elevStr = "Total Elevation: ";
+		String mSpeedStr = "Max Speed      : ";
+		String aSpeedStr = "Average Speed  : ";
+		String energyStr = "Energy         : ";
+
 		System.out.println(timestr + GPSUtils.formatTime(totalTime()));
-		System.out.println(distStr + GPSUtils.formatDouble((totalDistance()/1000))+ " km"); //konverterte fra m til km
-		System.out.println(elevStr + GPSUtils.formatDouble(totalElevation())+ " m");
-		System.out.println(mSpeedStr + GPSUtils.formatDouble(maxSpeed())+ (" km/t"));
-		System.out.println(aSpeedStr + GPSUtils.formatDouble(averageSpeed())+ " km/t");
-		System.out.println(energyStr + GPSUtils.formatDouble(totalKcal(WEIGHT))+ " kcal");
+		System.out.println(distStr + GPSUtils.formatDouble((totalDistance() / 1000)) + " km"); // konverterte fra m til
+																								// km
+		System.out.println(elevStr + GPSUtils.formatDouble(totalElevation()) + " m");
+		System.out.println(mSpeedStr + GPSUtils.formatDouble(maxSpeed()) + (" km/t"));
+		System.out.println(aSpeedStr + GPSUtils.formatDouble(averageSpeed()) + " km/t");
+		System.out.println(energyStr + GPSUtils.formatDouble(totalKcal(WEIGHT)) + " kcal");
 
 	}
 
