@@ -115,13 +115,13 @@ public class GPSUtils {
 	
 	
 	public static String formatDouble(double d) {
-        int førK = (int)d;
-        double etterK = java.lang.Math.round((d-førK)*100)/100.0;
+        int preK = (int)d;
+        double etterK = java.lang.Math.round((d-preK)*100)/100.0;
         String etterKStr = ""+etterK;
         if (etterKStr.length()==3)
             etterKStr=etterKStr+"0";
         
-        String retVerdi =førK+etterKStr.substring(1);
+        String retVerdi =preK+etterKStr.substring(1);
         return  String.format("%" + (TEXTWIDTH) + "s",retVerdi);
     }
 
