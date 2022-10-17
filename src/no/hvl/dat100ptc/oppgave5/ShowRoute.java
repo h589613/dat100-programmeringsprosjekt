@@ -63,37 +63,40 @@ public class ShowRoute extends EasyGraphics {
 	public void showRouteMap(int ybase) {
 		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
-		int stoppPunkt = gpspoints.length - 1;
-		setColor(0, 0, 255);
-		fillCircle(
-				(int)java.lang.Math.round(MARGIN + (gpspoints[0].getLongitude() - minlon) * xstep()),
-				(int)java.lang.Math.round(ybase - (gpspoints[0].getLatitude() - minlat) * ystep()),
-				6
-				);
-
-		for (int i = 1; i < gpspoints.length; i++) {
-			if (gpspoints[i].getElevation()>gpspoints[i-1].getElevation())
+		
+		for (int i = 0; i < gpspoints.length; i++) {
+			
+			int sirkelRadius = 0;
+			if (i==0||i==gpspoints.length-1) {
+				setColor(0,0,255);
+				sirkelRadius = 5;
+			}
+			else if (gpspoints[i].getElevation()>gpspoints[i-1].getElevation()) {
 				setColor(255,0,0);
-			else 
+				sirkelRadius = 3;
+			}
+			else {
 				setColor(0,255,0);
+				sirkelRadius = 3;
+			}
 			fillCircle(
 					(int)java.lang.Math.round(MARGIN + (gpspoints[i].getLongitude() - minlon) * xstep()),
 					(int)java.lang.Math.round(ybase - (gpspoints[i].getLatitude() - minlat) * ystep()),
-					3
-					);
-			drawLine(
-					(int)java.lang.Math.round(MARGIN + (gpspoints[i].getLongitude() - minlon) * xstep()),
-					(int)java.lang.Math.round(ybase - (gpspoints[i].getLatitude() - minlat) * ystep()),
-					(int)java.lang.Math.round(MARGIN + (gpspoints[i-1].getLongitude() - minlon) * xstep()),
-					(int)java.lang.Math.round(ybase - (gpspoints[i-1].getLatitude() - minlat) * ystep())
-					);	
+					sirkelRadius
+			);
+			if (i < gpspoints.length-1) {
+				if (gpspoints[i+1].getElevation()>gpspoints[i].getElevation()) {
+					setColor(255,0,0);
+				}
+				else {
+					setColor(0,255,0);
+				}
+				drawLine((int) java.lang.Math.round(MARGIN + (gpspoints[i].getLongitude() - minlon) * xstep()),
+						(int) java.lang.Math.round(ybase - (gpspoints[i].getLatitude() - minlat) * ystep()),
+						(int) java.lang.Math.round(MARGIN + (gpspoints[i + 1].getLongitude() - minlon) * xstep()),
+						(int) java.lang.Math.round(ybase - (gpspoints[i + 1].getLatitude() - minlat) * ystep()));
+			}		
 		}
-		setColor(0, 0, 255);
-		fillCircle(
-				(int)java.lang.Math.round(MARGIN + (gpspoints[stoppPunkt].getLongitude() - minlon) * xstep()),
-				(int)java.lang.Math.round(ybase - (gpspoints[stoppPunkt].getLatitude() - minlat) * ystep()),
-				6
-				);
 	}
 
 	private static double WEIGHT = 80.0;
