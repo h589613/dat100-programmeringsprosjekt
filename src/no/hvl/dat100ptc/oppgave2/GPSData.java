@@ -10,43 +10,40 @@ public class GPSData {
 	public GPSData(int n) {
 
 		gpspoints = new GPSPoint[n];
-		
-		
+
 	}
 
 	public GPSPoint[] getGPSPoints() {
 		return this.gpspoints;
 	}
-	
+
 	protected boolean insertGPS(GPSPoint gpspoint) {
 
 		boolean inserted = false;
-		if (antall<gpspoints.length) {
-			gpspoints[antall]=gpspoint;
+		if (antall < gpspoints.length) {
+			gpspoints[antall] = gpspoint;
 			antall++;
-			inserted=!inserted;
+			inserted = !inserted;
 		}
 		return inserted;
-	
+
 	}
 
 	public boolean insert(String time, String latitude, String longitude, String elevation) {
 
-		GPSPoint gpspoint = GPSDataConverter.convert(time, latitude,longitude,elevation);
+		GPSPoint gpspoint = GPSDataConverter.convert(time, latitude, longitude, elevation);
 		return insertGPS(gpspoint);
-		
+
 	}
 
 	public void print() {
 
-        System.out.println("====== Konvertert GPS Data - START ======");
+		System.out.println("====== Konvertert GPS Data - START ======");
 
-        for (int i=0;i<gpspoints.length;i++)
-            System.out.print(gpspoints[i].toString());
+		for (int i = 0; i < gpspoints.length; i++)
+			System.out.print(gpspoints[i].toString());
 
-        
+		System.out.println("====== Konvertert GPS Data - SLUTT ======");
 
-        System.out.println("====== Konvertert GPS Data - SLUTT ======");
-
-    }
+	}
 }
